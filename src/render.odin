@@ -1,13 +1,7 @@
 package main
 
-import "core:fmt"
-import "core:strings"
-import "core:unicode/utf8"
-
 import "vendor:sdl3"
 import "vendor:sdl3/ttf"
-
-import "../tb"
 
 render :: proc(app_ctx: ^App_Context) {
     sdl3.SetRenderDrawColor(

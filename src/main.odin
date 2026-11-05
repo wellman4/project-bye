@@ -1,11 +1,8 @@
 package main
 
 import "core:c"
-import "base:runtime"
 import "core:fmt"
-import "core:flags"
 import "core:os"
-import "core:slice"
 import "core:strings"
 
 import "vendor:sdl3"
@@ -296,7 +293,7 @@ handle_events :: proc (app_ctx: ^App_Context) -> bool {
 				if ctrl_pressed && tb.is_selection(&app_ctx.text_view.cursor) {
 					start, end := tb.get_selection_range(&app_ctx.text_view.cursor)
 
-					text, err := tb.gap_buffer_get_selection(&app_ctx.buffer, start, end)
+					text, _ := tb.gap_buffer_get_selection(&app_ctx.buffer, start, end)
 
 					c_str := strings.clone_to_cstring(text, context.temp_allocator)
 	
@@ -308,7 +305,7 @@ handle_events :: proc (app_ctx: ^App_Context) -> bool {
 				if ctrl_pressed && tb.is_selection(&app_ctx.text_view.cursor) {
 					start, end := tb.get_selection_range(&app_ctx.text_view.cursor)
 
-					text, err := tb.gap_buffer_get_selection(&app_ctx.buffer, start, end)
+					text, _ := tb.gap_buffer_get_selection(&app_ctx.buffer, start, end)
 
 					c_str := strings.clone_to_cstring(text, context.temp_allocator)
 	

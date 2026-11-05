@@ -2,8 +2,6 @@ package tb
 
 import "core:io"
 import "core:mem"
-import "core:fmt"
-import "core:unicode/utf8"
 
 Gap_Buffer :: struct {
 	data:       	[^]byte,
@@ -66,8 +64,8 @@ gap_buffer_init :: proc(
 	buf.gap_start = 0
 	buf.gap_end = buf.cap
 	
-	lines_cap := max(lines_cap, 4)
-	buf.line_offsets = make([dynamic]int, 0, lines_cap, buf.allocator)
+	initial_lines_cap := max(lines_cap, 4)
+	buf.line_offsets = make([dynamic]int, 0, initial_lines_cap, buf.allocator)
 	append(&buf.line_offsets, 0)
 	
 	return .None
@@ -440,8 +438,6 @@ gap_buffer_insert_text :: proc(buf: ^Gap_Buffer, cursor: ^Cursor, text: string) 
 			
 			cursor.col = 0
 		} else {
-			width := get_rune_len_by_first_byte(b)
-			
 			if (b & 0xC0) != 0x80 {
 				cursor.col += 1
 			}

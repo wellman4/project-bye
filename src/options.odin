@@ -2,7 +2,6 @@ package main
 
 import "core:os"
 import "core:flags"
-import "core:fmt"
 
 Options :: struct {
 	file_path:    string `args:"pos=0" usage:"Path to the file to open"`,
